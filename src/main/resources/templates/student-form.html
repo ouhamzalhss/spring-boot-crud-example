@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+
+</head>
+<body>
+
+<section layout:fragment="content">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/}">Students</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-xl">
+
+
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Manage <b>Students:</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a class="btn btn-success" ><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
+                    </div>
+                </div>
+            </div>
+
+
+            <form action="#" th:action="@{/save}"  th:object="${student}" method="post" >
+
+
+                <div class="form-group">
+                    <input type="hidden" th:field="*{id}" class="form-control" id="id" placeholder="Enter name" />
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter name" />
+                </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" th:field="*{email}" class="form-control" id="email"  placeholder="Enter email" />
+                </div>
+                  <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" th:field="*{address}" class="form-control" id="address"  placeholder="Enter address" />
+                </div>
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" th:field="*{phone}" class="form-control" id="phone" placeholder="Enter phone" />
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+</section>
+
+</body>
+</html>
