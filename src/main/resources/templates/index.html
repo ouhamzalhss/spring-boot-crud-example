@@ -2,34 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
         layout:decorate="layout">
 <head>
 
 </head>
 <body>
 <section layout:fragment="content">
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">Students</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-</nav>
 
 <div class="container-xl">
 
@@ -61,7 +40,7 @@
                     <div class="col-sm-6">
                         <h2>Manage <b>Students : </b></h2>
                     </div>
-                    <div class="col-sm-6">
+                    <div sec:authorize="hasRole('ADMIN')" class="col-sm-6">
                         <a th:href="@{/new}" class="btn btn-success" ><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
                     </div>
                 </div>
@@ -94,7 +73,7 @@
                     <td th:text="${student.email}"></td>
                     <td th:text="${student.address}"></td>
                     <td th:text="${student.phone}"></td>
-                    <td>
+                    <td sec:authorize="hasRole('ADMIN')">
                         <a th:href="@{/edit/{id}(id=${student.id})}"  class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                         <a
                                 th:data-confirm-delete="|Are you sure you want to delete this student ?|"
