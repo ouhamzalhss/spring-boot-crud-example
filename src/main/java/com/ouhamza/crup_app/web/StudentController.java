@@ -74,12 +74,15 @@ public class StudentController {
         return "redirect:/";
     }
 
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 
-
-
-
-
-
+    @GetMapping("/403")
+    public String accessDenied(){
+        return "accessDenied";
+    }
 
 
 

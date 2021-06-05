@@ -8,6 +8,11 @@ body {
 .dropdown-menu{
     min-width: 0px !important;
 }
+#logout{
+    background-color: white !important;
+    border: white !important;
+    margin-left: 15px !important;
+}
 .table-responsive {
     margin: 30px 0;
 }

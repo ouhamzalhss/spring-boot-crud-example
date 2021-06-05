@@ -46,7 +46,10 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a sec:authorize="!isAuthenticated()" class="dropdown-item" href="#">login</a>
-                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{logout}">logout </a>
+                        <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">logout </a>
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" value="Logout" />
+                        </form>
                     </div>
                 </li>
             </ul>
