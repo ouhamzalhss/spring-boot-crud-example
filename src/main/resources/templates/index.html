@@ -18,12 +18,12 @@
 
     <form th:action="@{/}" method="get">
         <div class="row mt-4">
-            <div class="col">
+            <div class="col-md-6">
                 <div class="form-group">
                     <input type="text" th:value="${keyWord}"  class="form-control" name="keyWord"  placeholder="Your Key word" />
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-1">
                 <div class="form-group">
                     <button class="btn btn-primary" type="submit">Serarch</button>
                 </div>
@@ -37,7 +37,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h2>Manage <b>Students : </b></h2>
+                        <h2>Manage <b>Students </b></h2>
                     </div>
                     <div sec:authorize="hasRole('ADMIN')" class="col-sm-6">
                         <a th:href="@{/new}" class="btn btn-success" ><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>

@@ -13,4 +13,5 @@ import org.springframework.stereotype.Repository;
 public interface StudentRepo extends JpaRepository<Student, Long> {
 
     Page<Student> findByNameContains(String name, Pageable pageable);
+
 }

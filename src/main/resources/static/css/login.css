@@ -27,3 +27,7 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+#logout{
+    background-color: white !important;
+    border: 0px #fff !important;
+}
