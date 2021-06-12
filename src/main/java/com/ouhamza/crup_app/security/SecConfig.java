@@ -45,16 +45,16 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
 //                .passwordEncoder(passwordEncoder)
 //                .rolePrefix("ROLE_");
 
-    auth.userDetailsService(userDetailsService)
-            .passwordEncoder(passwordEncoder());
+                auth.userDetailsService(userDetailsService)
+                            .passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //http.csrf().disable();
         http.formLogin().loginPage("/login");
-        http.authorizeRequests().antMatchers("/login","/css**/**","/resources**/**").permitAll();
-        http.authorizeRequests().antMatchers("/new**/**","/edit**/**","/delete**/**").hasRole("ADMIN");
+        http.authorizeRequests().antMatchers("/login","/register/**","/css**/**","/resources**/**").permitAll();
+        http.authorizeRequests().antMatchers("/new**/**","/edit**/**","/delete**/**").hasAuthority("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
 
         http.exceptionHandling().accessDeniedPage("/403");

@@ -8,8 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 /**
  * @author <a href="https://github.com/ouhamzalhss"> Lhouceine OUHAMZA </a>
@@ -54,7 +57,10 @@ public class StudentController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("student") Student student){
+    public String save(@Valid @ModelAttribute("student") Student student, BindingResult result){
+        if(result.hasErrors()){
+            return "student-form";
+        }
         studentService.save(student);
         return "redirect:/";
     }
