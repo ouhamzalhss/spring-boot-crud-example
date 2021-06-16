@@ -53,7 +53,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //http.csrf().disable();
         http.formLogin().loginPage("/login");
-        http.authorizeRequests().antMatchers("/login","/register/**","/css**/**","/resources**/**").permitAll();
+        http.authorizeRequests().antMatchers("/login","/confirm-account/**","/register/**","/css**/**","/resources**/**").permitAll();
         http.authorizeRequests().antMatchers("/new**/**","/edit**/**","/delete**/**").hasAuthority("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
 
