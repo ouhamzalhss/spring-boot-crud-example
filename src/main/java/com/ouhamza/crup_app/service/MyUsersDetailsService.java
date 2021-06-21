@@ -1,6 +1,7 @@
 package com.ouhamza.crup_app.service;
 
 import com.ouhamza.crup_app.dao.UserRepo;
+import com.ouhamza.crup_app.model.MyUserPrincipal;
 import com.ouhamza.crup_app.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +33,6 @@ public class MyUsersDetailsService implements UserDetailsService {
                 ((ArrayList<GrantedAuthority>) authorities).add(new SimpleGrantedAuthority(role.getRoleName()));
 
             });
-        return new User(user.getUsername(), user.getPassword(), authorities);
+        return new MyUserPrincipal(user);
     }
 }
