@@ -28,11 +28,7 @@ public class MyUsersDetailsService implements UserDetailsService {
         public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
             Users user = userRepo.findByUsername(username);
             if(user == null || !user.isActive()) throw new UsernameNotFoundException(username);
-            Collection<GrantedAuthority> authorities = new ArrayList<>();
-            user.getRoles().forEach(role -> {
-                ((ArrayList<GrantedAuthority>) authorities).add(new SimpleGrantedAuthority(role.getRoleName()));
 
-            });
-        return new MyUserPrincipal(user);
+            return new MyUserPrincipal(user);
     }
 }

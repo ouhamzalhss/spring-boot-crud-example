@@ -40,6 +40,13 @@
                         <h2>Manage <b>Students </b></h2>
                     </div>
                     <div sec:authorize="hasAuthority('ADMIN')" class="col-sm-6">
+                        <a th:href="@{/download-pdf}" class="btn btn-primary">
+                           <span>
+                               <img th:src="@{/images/pdf_icon.png}" height="20" width="20">
+                           </span>
+                            <span>Download pdf</span>
+                        </a>
+
                         <a th:href="@{/new}" class="btn btn-success" ><i class="material-icons">&#xE147;</i> <span>Add New Student</span></a>
                     </div>
                 </div>

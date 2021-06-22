@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Students</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+
+<body>
+
+<img src="images/logo.jpg" class="logo" />
+
+<h1>List of students </h1>
+
+<!-- Students Table -->
+<div id="students">
+    <div th:if="${not #lists.isEmpty(students)}">
+        <table class="students_table paginate-table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.email}"></td>
+                <td th:text="${student.address}"></td>
+                <td th:text="${student.phone}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<span th:text="'Count:' + ${#lists.size(students)}"></span>
+
+</body>
+</html>

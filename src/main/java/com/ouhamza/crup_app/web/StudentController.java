@@ -2,6 +2,7 @@ package com.ouhamza.crup_app.web;
 
 import com.ouhamza.crup_app.dao.StudentRepo;
 import com.ouhamza.crup_app.model.Student;
+import com.ouhamza.crup_app.service.PdfService;
 import com.ouhamza.crup_app.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author <a href="https://github.com/ouhamzalhss"> Lhouceine OUHAMZA </a>
@@ -26,6 +31,10 @@ public class StudentController {
 
     @Autowired
     private StudentRepo studentRepo;
+
+    @Autowired
+    private PdfService pdfService;
+
 
 //    @RequestMapping("/")
 //    public String index(Model model){
@@ -90,6 +99,19 @@ public class StudentController {
         return "accessDenied";
     }
 
-
+    @GetMapping("/download-pdf")
+    public void downloadPdf(HttpServletResponse response){
+        try {
+            Path file = Paths.get(pdfService.generatePdf().getAbsolutePath());
+            if(Files.exists(file)){
+                response.setContentType("application/pdf");
+                response.addHeader("Content-Disposition", "attachment; filename"+ file.getFileName());
+                Files.copy(file, response.getOutputStream());
+                response.getOutputStream().flush();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
