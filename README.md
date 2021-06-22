@@ -6,3 +6,6 @@ Here is a Youtube playList that explains this project step by step.
 </a>
 
 https://www.youtube.com/playlist?list=PL7HGekTat9aLg-bhWTJV8ifFZzhih104X
+
+
+<img src="https://github.com/ouhamzalhss/spring-boot-crud-example/blob/main/crudApp.png" width="30px">
