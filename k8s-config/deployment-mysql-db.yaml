@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+  labels:
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 250Mi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+  labels:
+    app: spring-boot-mysql
+spec:
+  storageClassName: standard
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 250Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  labels:
+    app: spring-boot-mysql
+spec:
+  selector:
+    matchLabels:
+      app: spring-boot-mysql
+      tier: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: spring-boot-mysql
+        tier: mysql
+    spec:
+      containers:
+      - image: mysql:5.7
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: root-password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: database-name
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: user-username
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: user-password
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc

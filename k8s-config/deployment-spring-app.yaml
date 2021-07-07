@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-deployment
+  labels:
+    app: spring-boot-mysql
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-boot-mysql
+  template:
+    metadata:
+      labels:
+        app: spring-boot-mysql
+    spec:
+      containers:
+      - image: crud-application
+        name: spring-boot-container
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9090
+        env:
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: database-name
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: user-username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: user-password

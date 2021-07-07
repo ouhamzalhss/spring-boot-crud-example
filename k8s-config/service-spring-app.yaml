@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-svc
+spec:
+  ports:
+  - port: 9090
+    targetPort: 9090
+    protocol: TCP
+    name: http
+  selector:
+    app: spring-boot-mysql
+  type: LoadBalancer
